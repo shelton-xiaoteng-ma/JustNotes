@@ -1,7 +1,5 @@
+import { SignUpCard } from "@/components/sign-up-card";
+
 export default function SignUpPage() {
-  return (
-    <div>
-      <h1>Sign Up</h1>
-    </div>
-  );
+  return <SignUpCard />;
 }
