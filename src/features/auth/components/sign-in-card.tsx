@@ -9,32 +9,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { OAuthCard } from "@/features/auth/components/oauth-card";
-import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { toast } from "sonner";
 import { AuthForm } from "./auth-form";
 
 export const SignInCard = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const checkSession = async () => {
-      const {
-        data: { session },
-        error,
-      } = await createClient().auth.getSession();
-
-      if (session) {
-        // User is authenticated
-        router.replace("/dashboard");
-      } else if (error) {
-        toast.error(`Error retrieving session:, ${error.message}`);
-      }
-    };
-    checkSession();
-  }, [router]);
-
   return (
     <div className="w-[400px]">
       <Card>

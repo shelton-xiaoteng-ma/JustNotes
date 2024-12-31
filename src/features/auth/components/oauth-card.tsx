@@ -18,6 +18,7 @@ export const OAuthCard = () => {
     try {
       const { data, error } = await createClient().auth.signInWithOAuth({
         provider: provider,
+        options: { redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard` },
       });
       if (error) {
         setLoading(false);
