@@ -6,6 +6,7 @@ const isPublicRoute = (request: NextRequest) => {
     /^\/$/, // Root path
     /^\/sign-in(.*)/, // Sign-in path
     /^\/sign-up(.*)/, // Sign-up path
+    /^\/callback(.*)/, // Sign-up path
     /^\/error$/, // Error page
     /^\/api(.*)/, // Error page
   ];
