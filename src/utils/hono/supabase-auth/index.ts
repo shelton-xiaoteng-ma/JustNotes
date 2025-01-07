@@ -49,7 +49,7 @@ export const supabaseMiddleware: MiddlewareHandler = async (c, next) => {
   await next();
 };
 
-export const getAuth = (c: Context): User | null => {
+export const getAuth = (c: Context): { user: User } | null => {
   return c.get("supabaseAuth") || null;
 };
 

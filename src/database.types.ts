@@ -40,20 +40,31 @@ export type Database = {
           description: string | null
           id: string
           name: string | null
+          user_id: string | null
         }
         Insert: {
           created_at?: string
           description?: string | null
           id?: string
           name?: string | null
+          user_id?: string | null
         }
         Update: {
           created_at?: string
           description?: string | null
           id?: string
           name?: string | null
+          user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "categories_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       customers: {
         Row: {

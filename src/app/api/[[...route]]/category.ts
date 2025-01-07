@@ -22,7 +22,7 @@ const app = new Hono()
     const data: Database["public"]["Tables"]["categories"]["Insert"] =
       c.req.valid("json");
     if (!data.user_id) {
-      data.user_id = getAuth(c)?.id;
+      data.user_id = getAuth(c)?.user.id;
     }
     if (!data.created_at) {
       data.created_at = new Date().toISOString();
@@ -32,7 +32,8 @@ const app = new Hono()
     return c.json(result);
   })
   .get("/", async (c) => {
-    const user_id = getAuth(c)?.id;
+    const user_id = getAuth(c)?.user.id;
+    console.log(user_id);
     if (!user_id) {
       return c.json({ error: "Unauthorized" }, 401);
     }
@@ -51,7 +52,7 @@ const app = new Hono()
     "/:id",
     zValidator("param", z.object({ id: z.string() })),
     async (c) => {
-      const user_id = getAuth(c)?.id;
+      const user_id = getAuth(c)?.user.id;
       const { id } = c.req.valid("param");
       if (!user_id) {
         return c.json({ error: "Unauthorized" }, 401);
@@ -70,7 +71,7 @@ const app = new Hono()
     }
   )
   .patch("/", zValidator("json", categoryUpdateSchema), async (c) => {
-    const user_id = getAuth(c)?.id;
+    const user_id = getAuth(c)?.user.id;
     const { id, name, description } = c.req.valid("json");
     if (!user_id) {
       return c.json({ error: "Unauthorized" }, 401);
